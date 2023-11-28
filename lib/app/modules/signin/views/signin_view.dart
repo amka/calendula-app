@@ -2,6 +2,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/signin_controller.dart';
@@ -18,10 +19,17 @@ class SigninView extends GetView<SigninController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/images/logo.png',
+                width: 128,
+                height: 128,
+              ),
               Text(
                 'Calendula',
-                style: TextStyle(
-                    fontSize: 32, color: Theme.of(context).colorScheme.primary),
+                style: GoogleFonts.ibmPlexSans(
+                  fontSize: 32,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
               const SizedBox(height: 16),
               Card(
@@ -40,7 +48,7 @@ class SigninView extends GetView<SigninController> {
                             if (value == null || value.trim().isEmpty) {
                               return 'We need email address';
                             }
-                            if (!GetUtils.isEmail(value!)) {
+                            if (!GetUtils.isEmail(value)) {
                               return 'We need valid email address';
                             }
                             return null;
@@ -63,17 +71,6 @@ class SigninView extends GetView<SigninController> {
                           },
                         ),
                         const SizedBox(height: 16),
-                        const Tooltip(
-                          waitDuration: Duration(milliseconds: 300),
-                          message:
-                              'By signing in you accept Terms and Privacy Policy',
-                          preferBelow: false,
-                          child: Text(
-                            'By signing in you accept Terms and Privacy Policy',
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
                         SizedBox(
                           width: double.infinity,
                           child: MaterialButton(
@@ -83,7 +80,6 @@ class SigninView extends GetView<SigninController> {
                                   try {
                                     await controller.signIn();
                                     Get.offAllNamed(Routes.HOME);
-                                    
                                   } on AppwriteException catch (e) {
                                     if (context.mounted) {
                                       ScaffoldMessenger.of(context)

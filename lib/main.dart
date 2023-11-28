@@ -22,7 +22,7 @@ void main() async {
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -30,7 +30,7 @@ void main() async {
           buttonTheme: const ButtonThemeData(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
           ),
           textTheme: GoogleFonts.interTextTheme()),

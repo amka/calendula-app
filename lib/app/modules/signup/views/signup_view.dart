@@ -2,6 +2,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/signup_controller.dart';
@@ -17,9 +18,14 @@ class SignupView extends GetView<SignupController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/images/logo.png',
+                width: 128,
+                height: 128,
+              ),
               Text(
                 'Calendula',
-                style: TextStyle(
+                style: GoogleFonts.ibmPlexSans(
                     fontSize: 32, color: Theme.of(context).colorScheme.primary),
               ),
               const SizedBox(height: 16),
@@ -62,6 +68,17 @@ class SignupView extends GetView<SignupController> {
                           },
                         ),
                         const SizedBox(height: 16),
+                        const Tooltip(
+                          waitDuration: Duration(milliseconds: 300),
+                          message:
+                              'By signing in you accept Terms and Privacy Policy',
+                          preferBelow: false,
+                          child: Text(
+                            'By signing in you accept Terms and Privacy Policy',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
                         SizedBox(
                           width: double.infinity,
                           child: MaterialButton(
@@ -71,7 +88,6 @@ class SignupView extends GetView<SignupController> {
                                   try {
                                     await controller.signUp();
                                     Get.offAllNamed(Routes.HOME);
-                                    
                                   } on AppwriteException catch (e) {
                                     if (context.mounted) {
                                       ScaffoldMessenger.of(context)
