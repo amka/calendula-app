@@ -32,12 +32,13 @@ class SigninController extends GetxController {
   Future signIn() async {
     try {
       loading.value = true;
-      authService.signIn(
+      await authService.signIn(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
     } catch (e) {
       log('Sign in failed: $e');
+      rethrow;
     } finally {
       loading.value = false;
     }

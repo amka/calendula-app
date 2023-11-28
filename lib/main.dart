@@ -18,7 +18,7 @@ void main() async {
     GetMaterialApp(
       title: "Application",
       theme: ThemeData(
-          colorSchemeSeed: Colors.lightBlue.shade300,
+          colorSchemeSeed: Colors.deepOrange.shade700,
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
             border: OutlineInputBorder(
