@@ -82,6 +82,8 @@ class SigninView extends GetView<SigninController> {
                                     .validate()) {
                                   try {
                                     await controller.signIn();
+                                    Get.offAllNamed(Routes.HOME);
+                                    
                                   } on AppwriteException catch (e) {
                                     if (context.mounted) {
                                       ScaffoldMessenger.of(context)
@@ -89,7 +91,7 @@ class SigninView extends GetView<SigninController> {
                                         SnackBar(
                                           content: Text(
                                               e.message ?? 'Sign in failed.'),
-                                         ),
+                                        ),
                                       );
                                     }
                                   } catch (e) {
