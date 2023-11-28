@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app/data/providers/appwrite.dart';
 import 'app/routes/app_pages.dart';
@@ -16,6 +17,23 @@ void main() async {
   runApp(
     GetMaterialApp(
       title: "Application",
+      theme: ThemeData(
+          colorSchemeSeed: Colors.lightBlue.shade300,
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          ),
+          buttonTheme: const ButtonThemeData(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+          ),
+          textTheme: GoogleFonts.interTextTheme()),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),

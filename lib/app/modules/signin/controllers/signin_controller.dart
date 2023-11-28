@@ -1,9 +1,19 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SigninController extends GetxController {
-  //TODO: Implement SigninController
+import '../../../data/services/auth.dart';
 
-  final count = 0.obs;
+class SigninController extends GetxController {
+  final AuthService authService = Get.find();
+
+  final formKey = GlobalKey<FormState>();
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final loading = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +29,17 @@ class SigninController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  Future signIn() async {
+    try {
+      loading.value = true;
+      authService.signIn(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } catch (e) {
+      log('Sign in failed: $e');
+    } finally {
+      loading.value = false;
+    }
+  }
 }
