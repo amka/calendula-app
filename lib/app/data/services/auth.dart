@@ -63,6 +63,7 @@ class AuthService extends GetxService {
       userId: ID.unique(),
       email: email,
       password: password,
+      name: email.split('@')[0],
     );
     await signIn(email: email, password: password);
   }
