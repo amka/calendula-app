@@ -8,6 +8,8 @@ import '../modules/leaves/bindings/leaves_binding.dart';
 import '../modules/leaves/views/leaves_view.dart';
 import '../modules/members/bindings/members_binding.dart';
 import '../modules/members/views/members_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.UPCOMING,
       page: () => const UpcomingView(),
       binding: UpcomingBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

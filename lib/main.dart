@@ -9,6 +9,7 @@ import 'app/controllers/appstate_controller.dart';
 import 'app/data/providers/appwrite.dart';
 import 'app/data/services/auth.dart';
 import 'app/routes/app_pages.dart';
+import 'app/widgets/sidebar/controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +53,7 @@ Future initServices() async {
     locale: Get.deviceLocale?.languageCode ?? 'en-Us',
   );
 
-  Get.lazyPut(() => AuthService(provider: provider));
   Get.put(AppstateController());
+  Get.put(AuthService(provider: provider));
+  Get.put(SidebarController());
 }

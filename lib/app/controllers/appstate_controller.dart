@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppstateController extends GetxController {
   final pageIndex = 0.obs;
+  final sidebarOpen = false.obs;
 
-  final count = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -20,4 +22,6 @@ class AppstateController extends GetxController {
   }
 
   void setPageIndex(int index) => pageIndex.value = index;
+
+  void toggleSidebar() => sidebarOpen.value = !sidebarOpen.value;
 }

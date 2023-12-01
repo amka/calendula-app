@@ -11,6 +11,7 @@ abstract class Routes {
   static const UPCOMING = _Paths.UPCOMING;
   static const MEMBERS = _Paths.MEMBERS;
   static const CALENDAR = _Paths.CALENDAR;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const UPCOMING = '/upcoming';
   static const MEMBERS = '/members';
   static const CALENDAR = '/calendar';
+  static const PROFILE = '/profile';
 }

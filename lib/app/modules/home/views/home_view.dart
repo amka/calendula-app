@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../../../controllers/appstate_controller.dart';
+import '../../../widgets/sidebar/sidebar.dart';
 import '../../calendar/controllers/calendar_controller.dart';
 import '../../calendar/views/calendar_view.dart';
 import '../../members/controllers/members_controller.dart';
@@ -38,7 +38,7 @@ class HomeView extends GetView<HomeController> {
             GetBuilder(
               init: MembersController(),
               builder: (GetxController controller) {
-                return const MembersView();
+                return MembersView();
               },
             )
           ],
@@ -48,6 +48,7 @@ class HomeView extends GetView<HomeController> {
         () => BottomNavigationBar(
           currentIndex: appState.pageIndex.value,
           onTap: appState.setPageIndex,
+          backgroundColor: Theme.of(context).colorScheme.background,
           items: const [
             BottomNavigationBarItem(
               label: 'Upcoming',
@@ -60,10 +61,11 @@ class HomeView extends GetView<HomeController> {
             BottomNavigationBarItem(
               label: 'Members',
               icon: Icon(Icons.people_alt_outlined),
-            )
+            ),
           ],
         ),
       ),
+      drawer: Sidebar(),
     );
   }
 }
