@@ -5,8 +5,7 @@ description: A new Flutter project.
 environment: 
   sdk: '>=3.2.1 <4.0.0'
 
-dependencies: 
-  cupertino_icons: ^1.0.2
+dependencies:
   get_storage: ^2.1.1
   google_fonts: ^6.1.0
   handy_window: ^0.3.1
@@ -14,6 +13,7 @@ dependencies:
   get: 4.6.6
   flutter: 
     sdk: flutter
+  flutter_tabler_icons: ^1.9.0
 
 dev_dependencies: 
   flutter_lints: ^2.0.0

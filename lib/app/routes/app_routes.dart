@@ -8,6 +8,9 @@ abstract class Routes {
   static const SIGNUP = _Paths.SIGNUP;
   static const LEAVES = _Paths.LEAVES;
   static const SPLASH = _Paths.SPLASH;
+  static const UPCOMING = _Paths.UPCOMING;
+  static const MEMBERS = _Paths.MEMBERS;
+  static const CALENDAR = _Paths.CALENDAR;
 }
 
 abstract class _Paths {
@@ -17,4 +20,7 @@ abstract class _Paths {
   static const SIGNUP = '/signup';
   static const LEAVES = '/leaves';
   static const SPLASH = '/splash';
+  static const UPCOMING = '/upcoming';
+  static const MEMBERS = '/members';
+  static const CALENDAR = '/calendar';
 }

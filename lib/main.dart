@@ -1,4 +1,3 @@
-import 'package:calendula/app/data/services/auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'app/controllers/appstate_controller.dart';
 import 'app/data/providers/appwrite.dart';
+import 'app/data/services/auth.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
@@ -52,4 +53,5 @@ Future initServices() async {
   );
 
   Get.lazyPut(() => AuthService(provider: provider));
+  Get.put(AppstateController());
 }
