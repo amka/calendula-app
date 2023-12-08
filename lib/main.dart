@@ -35,7 +35,7 @@ void main() async {
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
           ),
-          textTheme: GoogleFonts.interTextTheme()),
+          textTheme: GoogleFonts.notoSansTextTheme()),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),

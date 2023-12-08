@@ -65,7 +65,32 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       ),
-      drawer: Sidebar(),
+      drawer: const Sidebar(),
     );
+  }
+}
+
+/// An intent that is bound to SelectAllAction to select all the text in its
+/// controller.
+class AddMemberIntent extends Intent {
+  const AddMemberIntent();
+}
+
+/// An action that is bound to SelectAllAction that selects all text in its
+/// TextEditingController.
+class AddMemberAction extends Action<AddMemberIntent> {
+  AddMemberAction(this.controller);
+
+  final TextEditingController controller;
+
+  @override
+  Object? invoke(covariant AddMemberIntent intent) {
+    controller.selection = controller.selection.copyWith(
+      baseOffset: 0,
+      extentOffset: controller.text.length,
+      affinity: controller.selection.affinity,
+    );
+
+    return null;
   }
 }
