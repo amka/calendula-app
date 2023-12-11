@@ -1,16 +1,30 @@
-# calendula
+# Calendula
 
-A new Flutter project.
+Minimalistic absence tracker for a teams.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+**Not  ready for production yet**
 
-A few resources to get you started if this is your first Flutter project:
+## Roadmap
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Members
+  - [ ] Invite member
+  - [ ] Remove member
+- Organization
+  - [ ] Update organization meta
+  - [ ] Set profile image
+  - [ ] Add department
+  - [ ] Update department
+  - [ ] Delete department
+  - [ ] Add members to department
+  - [ ] Remove members from department
+- Profile
+  - [ ] Update profile
+  - [ ] Set profile image
+- Calendar
+  - [ ] Add absence
+  - [ ] Request absence
+  - [ ] Confirm/Decline absence
+- Notification
+  - [ ] Push notification
