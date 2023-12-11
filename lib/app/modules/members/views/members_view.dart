@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 
+import '../../../core/utils/device_info.dart';
 import '../../../widgets/header_bar.dart';
 import '../../../widgets/primary_button.dart';
 import '../controllers/members_controller.dart';
@@ -15,6 +16,8 @@ class MembersView extends GetView<MembersController> {
 
   @override
   Widget build(BuildContext context) {
+    final isLargeScreen =
+        DeviceScreen.isTablet(context) || DeviceScreen.isMonitor(context);
     return Scaffold(
         body: SafeArea(
       child: Column(
@@ -22,33 +25,15 @@ class MembersView extends GetView<MembersController> {
           HeaderBar(
             title: 'Members'.tr,
             trailing: [
-              ElevatedButton(
+              TextButton(
                 child: const Row(
                   children: [
                     Icon(TablerIcons.user_plus),
                     SizedBox(width: 8),
-                    Text('Add'),
+                    Text('Add Member'),
                   ],
                 ),
-                onPressed: () async {
-                  await Get.defaultDialog(
-                      content: ConstrainedBox(
-                        constraints: const BoxConstraints(minWidth: 360),
-                        child: const CreateMemberForm(),
-                      ),
-                      title: 'Add a member'.tr,
-                      backgroundColor: Theme.of(context).colorScheme.background,
-                      radius: 10,
-                      actions: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: PrimaryButton(
-                            label: 'Save member'.tr,
-                            onPressed: () => Get.back(),
-                          ),
-                        ),
-                      ]);
-                },
+                onPressed: () => onAddMember(context),
               ),
             ],
           ),
@@ -81,5 +66,26 @@ class MembersView extends GetView<MembersController> {
         ],
       ),
     ));
+  }
+
+  void onAddMember(context) async {
+    await Get.defaultDialog(
+      content: ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: 360),
+        child: const CreateMemberForm(),
+      ),
+      title: 'Add a member'.tr,
+      backgroundColor: Theme.of(context).colorScheme.background,
+      radius: 10,
+      actions: [
+        SizedBox(
+          width: double.infinity,
+          child: PrimaryButton(
+            label: 'Save member'.tr,
+            onPressed: () => Get.back(),
+          ),
+        ),
+      ],
+    );
   }
 }
