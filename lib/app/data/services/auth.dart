@@ -24,14 +24,16 @@ class AuthService extends GetxService {
     return this;
   }
 
-  Future loadUser() async {
+  Future<User?> loadUser() async {
     try {
       final user = await provider.account.get();
       status.value = AuthStatus.authenticated;
       this.user.value = user;
+      return user;
     } catch (e) {
       status.value = AuthStatus.unauthenticated;
     }
+    return null;
   }
 
   Future<void> signUp({required String email, required String password}) async {

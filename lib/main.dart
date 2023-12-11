@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -32,12 +34,23 @@ void main() async {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       builder: EasyLoading.init(),
+      onInit: () {
+        Get.find<AuthService>().loadUser().then((user) {
+          if (user != null) {
+            Get.find<TeamService>().fetchTeams();
+          }
+        });
+      },
+      onUnknownRoute: (RouteSettings routeSettings) {
+        log(routeSettings.toString());
+        return null;
+      },
     ),
   );
 }
 
 initServices() async {
-  final appwrite = AppwriteProvider(
+  final provider = AppwriteProvider(
     baseUrl: "https://cloud.appwrite.io/v1",
     projectId: "calendula",
     locale: Get.locale.toString(),
@@ -45,6 +58,6 @@ initServices() async {
   );
 
   Get.put(AppstateService());
-  Get.put(AuthService(provider: appwrite));
-  Get.put(TeamService(provider: appwrite));
+  Get.put(AuthService(provider: provider));
+  Get.put(TeamService(provider: provider));
 }
