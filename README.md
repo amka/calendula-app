@@ -9,7 +9,7 @@ Minimalistic absence tracker for a teams.
 ## Roadmap
 
 - Members
-  - [ ] Invite member
+  - [x] Invite member
   - [ ] Remove member
 - Organization
   - [ ] Update organization meta
