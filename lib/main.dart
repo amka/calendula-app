@@ -35,9 +35,20 @@ void main() async {
       getPages: AppPages.routes,
       builder: EasyLoading.init(),
       onInit: () {
+        // Check if the user was authenticated
         Get.find<AuthService>().loadUser().then((user) {
           if (user != null) {
             Get.find<TeamService>().fetchTeams();
+          } else {
+            // If the user was not authenticated
+            // And trying to get private routes
+            // Then redirect to sign in page.
+            if (Get.currentRoute.startsWith(Routes.ACCEPT_INVITAION) ||
+                Get.currentRoute.startsWith(Routes.SIGNIN) ||
+                Get.currentRoute.startsWith(Routes.SIGNUP)) {
+              return;
+            }
+            Get.offAllNamed(Routes.SIGNIN);
           }
         });
       },
