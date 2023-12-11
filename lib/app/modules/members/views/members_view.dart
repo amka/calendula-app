@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../../core/utils/device_info.dart';
 import '../../../widgets/header_bar.dart';
-import '../../../widgets/primary_button.dart';
 import '../controllers/members_controller.dart';
 import '../widgets/create_form.dart';
 import '../widgets/member_list_tile.dart';
@@ -69,23 +68,33 @@ class MembersView extends GetView<MembersController> {
   }
 
   void onAddMember(context) async {
-    await Get.defaultDialog(
+    final member = await Get.defaultDialog(
       content: ConstrainedBox(
         constraints: const BoxConstraints(minWidth: 360),
-        child: const CreateMemberForm(),
+        child: CreateMemberForm(),
       ),
       title: 'Add a member'.tr,
+      titleStyle: TextStyle(
+        color: Theme.of(context).colorScheme.onBackground,
+      ),
+      titlePadding: const EdgeInsets.only(top: 16, bottom: 16),
       backgroundColor: Theme.of(context).colorScheme.background,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       radius: 10,
-      actions: [
-        SizedBox(
-          width: double.infinity,
-          child: PrimaryButton(
-            label: 'Save member'.tr,
-            onPressed: () => Get.back(),
-          ),
-        ),
-      ],
+      // actions: [
+      //   SizedBox(
+      //     width: double.infinity,
+      //     child: PrimaryButton(
+      //       label: 'Save member'.tr,
+      //       onPressed: () => Get.back(),
+      //     ),
+      //   ),
+      // ],
     );
+
+    if (member != null) {
+      await controller.inviteMember(member);
+      await controller.getMembers();
+    }
   }
 }

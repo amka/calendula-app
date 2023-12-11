@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../data/services/team.dart';
+import '../models/member.dart';
 
 class MembersController extends GetxController {
   final TeamService teamService = Get.find();
@@ -30,5 +31,13 @@ class MembersController extends GetxController {
   void changePage(int page) {
     currentPage.value = page;
     getMembers();
+  }
+
+  Future<Membership> inviteMember(Member member) async {
+    return await teamService.inviteMember(
+      teamId: teamService.currentTeam.value!.$id,
+      email: member.email,
+      roles: member.roles ?? ['MEMBER'],
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+// import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../data/services/auth.dart';
@@ -20,7 +20,7 @@ class SplashController extends GetxController {
           ? Get.offAllNamed(Routes.TEAMS)
           : Get.offAllNamed(Routes.SIGNIN);
     }).catchError((e) {
-      EasyLoading.showError('Failed to start');
+      log('Failed to start: $e');
     });
   }
 

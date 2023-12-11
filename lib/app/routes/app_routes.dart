@@ -13,6 +13,7 @@ abstract class Routes {
   static const CALENDAR = _Paths.CALENDAR;
   static const TEAMS = _Paths.TEAMS;
   static const TEAMS_CREATE = _Paths.TEAMS_CREATE;
+  static const ACCEPT_INVITAION = _Paths.ACCEPT_INVITAION;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const CALENDAR = '/calendar';
   static const TEAMS = '/teams';
   static const TEAMS_CREATE = '/teams-create';
+  static const ACCEPT_INVITAION = '/accept-invitaion';
 }

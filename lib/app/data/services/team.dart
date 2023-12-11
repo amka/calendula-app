@@ -32,6 +32,10 @@ class TeamService extends GetxService {
     return team;
   }
 
+  Future<Team> getTeam({required String teamId}) async {
+    return await provider.teams.get(teamId: teamId);
+  }
+
   Future<Preferences> getPrefs({required String teamId}) async {
     return await provider.teams.getPrefs(teamId: teamId);
   }
@@ -59,10 +63,24 @@ class TeamService extends GetxService {
       roles: roles,
       email: email,
       phone: phone,
-      url: url,
+      url: url ?? 'http://localhost:8080/#/accept-invitation',
       name: name,
     );
     return membership;
+  }
+
+  Future<Membership> updateMembershipStatus({
+    required String teamId,
+    required String membershipId,
+    required String userId,
+    required String secret,
+  }) async {
+    return await provider.teams.updateMembershipStatus(
+      teamId: teamId,
+      membershipId: membershipId,
+      userId: userId,
+      secret: secret,
+    );
   }
 
   Future<List<Membership>> listMembers({

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/accept-invitaion/bindings/accept_invitaion_binding.dart';
+import '../modules/accept-invitaion/views/accept_invitaion_view.dart';
 import '../modules/calendar/bindings/calendar_binding.dart';
 import '../modules/calendar/views/calendar_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.TEAMS_CREATE,
       page: () => const TeamsCreateView(),
       binding: TeamsCreateBinding(),
+    ),
+    GetPage(
+      name: _Paths.ACCEPT_INVITAION,
+      page: () => const AcceptInvitaionView(),
+      binding: AcceptInvitaionBinding(),
     ),
   ];
 }
