@@ -45,7 +45,7 @@ class AcceptInvitaionView extends GetView<AcceptInvitaionController> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 32),
                           child: Text(
-                            'Press Accept to accept :)'
+                            'Accept invite or sign into existing account'
                                 .tr,
                             style: TextStyle(
                               color:
@@ -57,7 +57,7 @@ class AcceptInvitaionView extends GetView<AcceptInvitaionController> {
                           width: double.infinity,
                           child: Obx(
                                 () => PrimaryButton(
-                                label: 'Accept invitaion'.tr,
+                                label: 'Accept'.tr,
                                 onPressed: controller.loading.value
                                     ? null
                                     : controller.onAcceptInvitation),
@@ -74,7 +74,7 @@ class AcceptInvitaionView extends GetView<AcceptInvitaionController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Need an account? '.tr,
+                      'Already have an account? '.tr,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
@@ -82,9 +82,9 @@ class AcceptInvitaionView extends GetView<AcceptInvitaionController> {
                     MouseRegion(
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
-                        onTap: () => Get.offNamed(Routes.SIGNUP),
+                        onTap: () => Get.offNamed(Routes.SIGNIN),
                         child: Text(
-                          'Sign up here'.tr,
+                          'Sign in here'.tr,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.onBackground,

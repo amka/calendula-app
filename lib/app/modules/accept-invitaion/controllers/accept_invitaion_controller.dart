@@ -1,4 +1,6 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../data/services/team.dart';
@@ -30,8 +32,10 @@ class AcceptInvitaionController extends GetxController {
       await teamService.fetchTeams();
 
       Get.offAllNamed(Routes.HOME);
+    } on AppwriteException catch (e) {
+      EasyLoading.showError(e.message.toString());
     } finally {
-      loading.value = true;
+      loading.value = false;
     }
   }
 }
