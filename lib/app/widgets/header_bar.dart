@@ -19,46 +19,46 @@ class HeaderBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return !DeviceScreen.isTablet(context) && !DeviceScreen.isMonitor(context)
-        ? DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  width: 1.0,
-                  color: Theme.of(context).colorScheme.secondary.withAlpha(75),
+    final isSmallScreen =
+        !DeviceScreen.isTablet(context) && !DeviceScreen.isMonitor(context);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            width: 1.0,
+            color: Theme.of(context).colorScheme.secondary.withAlpha(75),
+          ),
+        ),
+      ),
+      child: SizedBox(
+        height: kToolbarHeight,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: Row(
+            children: [
+              if (isSmallScreen)
+                const Hero(
+                  tag: 'profile-avatar',
+                  child: Avatar(),
+                ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  overflow: TextOverflow.fade,
                 ),
               ),
-            ),
-            child: SizedBox(
-              height: kToolbarHeight,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Row(
-                  children: [
-                    Tooltip(
-                      message: authService.user.value!.name,
-                      child: const Avatar(),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
-                        overflow: TextOverflow.fade,
-                      ),
-                    ),
-                    const Spacer(),
-                    ...(trailing ?? []),
-                  ],
-                ),
-              ),
-            ),
-          )
-        : const SizedBox.shrink();
+              const Spacer(),
+              ...(trailing ?? []),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -73,7 +73,9 @@ class Sidebar extends StatelessWidget {
         child: Obx(
           () => Column(
             children: [
-              const Avatar(
+              const Hero(
+                tag: 'profile-avatar',
+                child: Avatar(),
               ),
               teamService.currentTeam.value != null
                   ? Padding(
