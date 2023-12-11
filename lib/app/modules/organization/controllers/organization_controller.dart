@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class UpcomingController extends GetxController {
-  //TODO: Implement UpcomingController
+class OrganizationController extends GetxController {
+  //TODO: Implement OrganizationController
 
   final count = 0.obs;
 

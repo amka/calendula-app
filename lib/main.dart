@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:voidtask/app/data/services/appstate.dart';
+import 'package:voidtask/app/data/services/team.dart';
 
-import 'app/controllers/appstate_controller.dart';
-import 'app/data/providers/appwrite.dart';
+import 'app/data/appwrite_provider.dart';
 import 'app/data/services/auth.dart';
 import 'app/routes/app_pages.dart';
-import 'app/widgets/sidebar/controller.dart';
+import 'app/themes/dark.dart';
+import 'app/themes/light.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,42 +19,32 @@ void main() async {
 
   runApp(
     GetMaterialApp(
-      title: "Application",
+      title: "Void Tracker",
+      darkTheme: ThemeData(
+        colorScheme: darkScheme,
+        textTheme: GoogleFonts.nunitoSansTextTheme(),
+      ),
       theme: ThemeData(
-          colorSchemeSeed: Colors.deepOrange.shade700,
-          inputDecorationTheme: InputDecorationTheme(
-            filled: true,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          ),
-          buttonTheme: const ButtonThemeData(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-            ),
-          ),
-          textTheme: GoogleFonts.notoSansTextTheme()),
+        colorScheme: lightScheme,
+        textTheme: GoogleFonts.nunitoSansTextTheme(),
+      ),
+      // defaultTransition: Transition.cupertino,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      builder: EasyLoading.init(),
     ),
   );
 }
 
-Future initServices() async {
-  await GetStorage.init();
-
-  const apiUrl = String.fromEnvironment('API_URL');
-
-  final provider = AppWriteProvider(
-    endpoint: apiUrl,
-    selfSigned: kDebugMode,
-    locale: Get.deviceLocale?.languageCode ?? 'en-Us',
+initServices() async {
+  final appwrite = AppwriteProvider(
+    baseUrl: "https://cloud.appwrite.io/v1",
+    projectId: "nanoplan",
+    locale: Get.locale.toString(),
+    selfSigned: !kReleaseMode,
   );
 
-  Get.put(AppstateController());
-  Get.put(AuthService(provider: provider));
-  Get.put(SidebarController());
+  Get.put(AppstateService());
+  Get.put(AuthService(provider: appwrite));
+  Get.put(TeamService(provider: appwrite));
 }

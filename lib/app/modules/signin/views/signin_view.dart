@@ -1,116 +1,110 @@
-import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import '../../../routes/app_pages.dart';
+import '../../../widgets/entry.dart';
+import '../../../widgets/primary_button.dart';
 import '../controllers/signin_controller.dart';
 
 class SigninView extends GetView<SigninController> {
-  const SigninView({super.key});
+  const SigninView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+        child: SizedBox(
+          width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/images/logo.png',
-                width: 128,
-                height: 128,
-              ),
-              Text(
-                'Calendula',
-                style: GoogleFonts.ibmPlexSans(
-                  fontSize: 32,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              const SizedBox(height: 16),
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 360),
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 64,
+                  ),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 360),
                     child: Form(
                       key: controller.formKey,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextFormField(
-                            controller: controller.emailController,
-                            decoration: const InputDecoration(labelText: 'Email'),
-                            autofocus: true,
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'We need email address';
-                              }
-                              if (!GetUtils.isEmail(value)) {
-                                return 'We need valid email address';
-                              }
-                              return null;
-                            },
+                          GradientText(
+                            'Sign In'.tr,
+                            style: const TextStyle(
+                              fontSize: 48,
+                              fontWeight: FontWeight.bold,
+                              // color: Theme.of(context).colorScheme.onBackground,
+                            ),
+                            colors: [
+                              Colors.deepPurple.shade700,
+                              Colors.teal,
+                            ],
                           ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            controller: controller.passwordController,
-                            decoration:
-                                const InputDecoration(labelText: 'Password'),
-                            obscureText: true,
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'We need password';
-                              }
-                              if (value.length < 8) {
-                                return 'Password must be at least 8 characters';
-                              }
-                              return null;
-                            },
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 32),
+                            child: Text(
+                              'Enter your email and password to login to Calendula'
+                                  .tr,
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
+                            ),
                           ),
-                          const SizedBox(height: 16),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 24),
+                            child: Obx(
+                              () => Entry(
+                                controller: controller.emailController,
+                                label: 'Email'.tr,
+                                autofocus: true,
+                                enabled: !controller.loading.value,
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'Email is required'.tr;
+                                  }
+                                  if (!value.trim().isEmail) {
+                                    return 'Valid email is required'.tr;
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 24),
+                            child: Obx(
+                              () => Entry(
+                                controller: controller.passwordController,
+                                label: 'Password'.tr,
+                                obscureText: true,
+                                enabled: !controller.loading.value,
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'Password is required'.tr;
+                                  }
+                                  if (value.trim().length < 8) {
+                                    return 'At least 8 symbols is required'.tr;
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
                           SizedBox(
                             width: double.infinity,
-                            child: MaterialButton(
-                                onPressed: () async {
-                                  if (controller.formKey.currentState!
-                                      .validate()) {
-                                    try {
-                                      await controller.signIn();
-                                      Get.offAllNamed(Routes.HOME);
-                                    } on AppwriteException catch (e) {
-                                      if (context.mounted) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                                e.message ?? 'Sign in failed.'),
-                                          ),
-                                        );
-                                      }
-                                    } catch (e) {
-                                      if (context.mounted) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text('Sign in failed.')),
-                                        );
-                                      }
-                                    }
-                                  }
-                                },
-                                color: Theme.of(context).colorScheme.primary,
-                                child: Text(
-                                  'Sign In',
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.onPrimary,
-                                  ),
-                                )),
+                            child: Obx(
+                              () => PrimaryButton(
+                                  label: 'Login'.tr,
+                                  onPressed: controller.loading.value
+                                      ? null
+                                      : controller.onSingIn),
+                            ),
                           ),
                         ],
                       ),
@@ -118,22 +112,32 @@ class SigninView extends GetView<SigninController> {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Need an account? '),
-                  MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      onTap: () => Get.offNamed(Routes.SIGNUP),
-                      child: const Text(
-                        'Sign Up',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Need an account? '.tr,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
-                  )
-                ],
+                    MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () => Get.offNamed(Routes.SIGNUP),
+                        child: Text(
+                          'Sign up here'.tr,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),

@@ -1,46 +1,49 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
+import 'package:appwrite/appwrite.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../data/services/auth.dart';
+import '../../../routes/app_pages.dart';
 
 class SignupController extends GetxController {
-  final AuthService authService = Get.find();
+  final AuthService authService;
 
+  SignupController({required this.authService});
+
+  final loading = false.obs;
   final formKey = GlobalKey<FormState>();
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final loading = false.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
     super.onClose();
   }
 
-  Future signUp() async {
-    try {
-      loading.value = true;
-      await authService.signUp(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-    } catch (e) {
-      log('Sign up failed: $e');
-      rethrow;
-    } finally {
-      loading.value = false;
+  void onSignUp() async {
+    if (formKey.currentState!.validate()) {
+      try {
+        loading.value = true;
+        await authService.signUp(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim());
+
+        Get.offAllNamed(Routes.TEAMS);
+
+      } on AppwriteException catch (e) {
+        log('SignUp failed: ${e.toString()}');
+        EasyLoading.showError(e.message ?? 'Failed to sign up');
+      } catch (e) {
+        log('SignUp failed: ${e.toString()}');
+        EasyLoading.showError('Failed to sign up');
+      } finally {
+        loading.value = false;
+      }
     }
   }
 }

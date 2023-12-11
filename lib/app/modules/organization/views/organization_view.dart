@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/header_bar.dart';
-import '../controllers/calendar_controller.dart';
+import '../controllers/organization_controller.dart';
 
-class CalendarView extends GetView<CalendarController> {
-  const CalendarView({super.key});
+class OrganizationView extends GetView<OrganizationController> {
+  const OrganizationView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +14,11 @@ class CalendarView extends GetView<CalendarController> {
       body: SafeArea(
         child: Column(
           children: [
-            HeaderBar(title: 'Calendar'.tr),
+            HeaderBar(title: 'Organization'.tr),
             const Expanded(
               child: Center(
                 child: Text(
-                  'Calendar is working',
+                  'Organization is working',
                   style: TextStyle(fontSize: 20),
                 ),
               ),

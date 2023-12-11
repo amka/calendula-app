@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import '../controllers/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
   const SplashView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SplashView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'SplashView is working',
-          style: TextStyle(fontSize: 20),
+      body: Center(
+        child: GradientText(
+          'Calendula',
+          style: const TextStyle(fontSize: 48),
+          colors: [
+            Colors.deepPurple.shade700,
+            Colors.teal.shade700,
+          ],
         ),
       ),
     );
