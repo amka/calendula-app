@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6f86aec9-50f0-47e0-b36c-e1e9ac8fe33d/deploy-status)](https://app.netlify.com/sites/calendula-beta/deploys)
+
 # Calendula
 
 Minimalistic absence tracker for a teams.
