@@ -11,11 +11,7 @@ class TeamsView extends GetView<TeamsController> {
     return const Scaffold(
       body: SafeArea(
         child: Center(
-          child: Column(
-            children: [
-              CircularProgressIndicator(),
-            ],
-          ),
+          child: CircularProgressIndicator(),
         ),
       ),
     );
