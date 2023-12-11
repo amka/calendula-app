@@ -7,6 +7,7 @@ import '../data/services/appstate.dart';
 import '../data/services/auth.dart';
 import '../data/services/team.dart';
 import '../routes/app_pages.dart';
+import 'avatar.dart';
 
 class Sidebar extends StatelessWidget {
   final int selectedIndex;
@@ -72,12 +73,7 @@ class Sidebar extends StatelessWidget {
         child: Obx(
           () => Column(
             children: [
-              const CircleAvatar(
-                radius: 26,
-                backgroundColor: Colors.white,
-                child: CircleAvatar(
-                  radius: 24,
-                ),
+              const Avatar(
               ),
               teamService.currentTeam.value != null
                   ? Padding(

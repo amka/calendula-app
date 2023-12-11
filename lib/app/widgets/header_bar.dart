@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:voidtask/app/core/utils/device_info.dart';
 
+import '../core/utils/device_info.dart';
 import '../data/services/appstate.dart';
 import '../data/services/auth.dart';
 import '../data/services/team.dart';
+import 'avatar.dart';
 
 class HeaderBar extends StatelessWidget {
   final AuthService authService = Get.find();
@@ -32,14 +33,12 @@ class HeaderBar extends StatelessWidget {
               height: kToolbarHeight,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Row(
                   children: [
                     Tooltip(
                       message: authService.user.value!.name,
-                      child: CircleAvatar(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                      ),
+                      child: const Avatar(),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
