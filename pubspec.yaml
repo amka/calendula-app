@@ -1,7 +1,7 @@
-name: voidtask
+name: calendula
 version: 1.0.0+1
 publish_to: none
-description: Minimalist void tracker - task manager
+description: Minimalist absence tracker for teams
 environment: 
   sdk: '>=3.2.3 <4.0.0'
 
