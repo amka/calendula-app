@@ -3,6 +3,7 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
+
   static const HOME = _Paths.HOME;
   static const SPLASH = _Paths.SPLASH;
   static const SIGNIN = _Paths.SIGNIN;
@@ -18,6 +19,7 @@ abstract class Routes {
 
 abstract class _Paths {
   _Paths._();
+
   static const HOME = '/home';
   static const SPLASH = '/splash';
   static const SIGNIN = '/signin';
@@ -28,5 +30,5 @@ abstract class _Paths {
   static const CALENDAR = '/calendar';
   static const TEAMS = '/teams';
   static const TEAMS_CREATE = '/teams-create';
-  static const ACCEPT_INVITAION = '/accept-invitaion';
+  static const ACCEPT_INVITAION = '/invited';
 }

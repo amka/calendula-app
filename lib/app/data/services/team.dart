@@ -2,6 +2,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:get/get.dart';
 
+import '../../../constants.dart';
 import '../appwrite_provider.dart';
 
 class TeamService extends GetxService {
@@ -63,7 +64,7 @@ class TeamService extends GetxService {
       roles: roles,
       email: email,
       phone: phone,
-      url: url ?? 'http://localhost:8080/#/accept-invitation',
+      url: url ?? '$schema://$domain/#/invited',
       name: name,
     );
     return membership;

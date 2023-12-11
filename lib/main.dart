@@ -64,7 +64,7 @@ initServices() async {
   final provider = AppwriteProvider(
     baseUrl: "https://cloud.appwrite.io/v1",
     projectId: "calendula",
-    locale: Get.locale.toString(),
+    locale: (Get.locale ?? 'en-US').toString(),
     selfSigned: !kReleaseMode,
   );
 
