@@ -12,7 +12,13 @@ class MembersController extends GetxController {
   final currentPage = 0.obs;
   final loading = false.obs;
 
-  Future<List<Membership>> getMembers() async {
+  final members = <Membership>[].obs;
+
+  Future<List<Membership>> getMembers({bool force=false}) async {
+    if (!force && members.isNotEmpty) {
+      return members;
+    }
+
     try {
       loading.value = true;
       return await teamService.listMembers(

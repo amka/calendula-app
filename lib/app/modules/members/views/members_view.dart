@@ -15,8 +15,6 @@ class MembersView extends GetView<MembersController> {
 
   @override
   Widget build(BuildContext context) {
-    final isLargeScreen =
-        DeviceScreen.isTablet(context) || DeviceScreen.isMonitor(context);
     return Scaffold(
         body: SafeArea(
       child: Column(
@@ -94,7 +92,7 @@ class MembersView extends GetView<MembersController> {
 
     if (member != null) {
       await controller.inviteMember(member);
-      await controller.getMembers();
+      await controller.getMembers(force: true);
     }
   }
 }
