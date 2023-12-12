@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/device_info.dart';
 import '../../../widgets/header_bar.dart';
 import '../controllers/members_controller.dart';
 import '../widgets/create_form.dart';
